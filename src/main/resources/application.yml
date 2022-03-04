@@ -1,0 +1,28 @@
+server:
+    port: 8080
+    servlet:
+        context-path: /
+
+logging:
+    level:
+        root: DEBUG
+        org.springframework.web: INFO
+        org.springframework.security: INFO
+        org.springframework.security.saml: INFO
+        org.opensaml.xmlsec: TRACE
+
+spring:
+    security:
+        saml2:
+            relyingparty:
+                registration:
+                    aliyunidaas: # samlexample 即为 {registrationId} 可为任意字符串
+                        signing:
+                            credentials:
+                                  certificate-location: "classpath:credentials/public.cer"  # 即公钥目录地址
+                        identityprovider:
+                            entity-id:  #idaas中拿到的 IdP Entity ID
+                            singlesignon:
+                                sign-request: false
+                                url:  #idaas 中拿到的 IdP SSO 地址
+                            metadata-uri:  #idaas中拿到的 IdP Metadata
